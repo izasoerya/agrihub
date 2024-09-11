@@ -72,8 +72,12 @@ class _RegisterPageState extends State<RegisterPage> {
     return Center(
       child: Container(
         width: 1.sw,
-        height: 0.6.sh,
-        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
+        margin: EdgeInsets.symmetric(
+          horizontal: ScreenUtil().orientation == Orientation.portrait
+              ? 0.05.sw
+              : 0.25.sw,
+          vertical: 0.05.sh,
+        ),
         padding: EdgeInsets.symmetric(vertical: 0.03.sh, horizontal: 0.05.sw),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,

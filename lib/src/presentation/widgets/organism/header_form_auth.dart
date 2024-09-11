@@ -22,7 +22,9 @@ class HeaderFormAuth extends StatelessWidget {
                 heading,
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyLarge!.color,
-                  fontSize: 24.sp,
+                  fontSize: ScreenUtil().orientation == Orientation.portrait
+                      ? 24.sp
+                      : 12.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -30,7 +32,9 @@ class HeaderFormAuth extends StatelessWidget {
                 subheading,
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyMedium!.color,
-                  fontSize: 12.sp,
+                  fontSize: ScreenUtil().orientation == Orientation.portrait
+                      ? 12.sp
+                      : 8.sp,
                 ),
               ),
             ],
