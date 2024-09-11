@@ -56,63 +56,55 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Container(
+      width: 1.sw,
+      margin: EdgeInsets.symmetric(
+        horizontal: ScreenUtil().orientation == Orientation.portrait
+            ? 0.05.sw
+            : 0.25.sw,
+        vertical: 0.05.sh,
+      ),
+      padding: EdgeInsets.symmetric(vertical: 0.03.sh, horizontal: 0.05.sw),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            width: 1.sw,
-            margin: EdgeInsets.symmetric(
-              horizontal: ScreenUtil().orientation == Orientation.portrait
-                  ? 0.05.sw
-                  : 0.25.sw,
-              vertical: 0.05.sh,
-            ),
-            padding:
-                EdgeInsets.symmetric(vertical: 0.03.sh, horizontal: 0.05.sw),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const HeaderFormAuth(
-                  heading: 'Masuk',
-                  subheading: 'Masuk Untuk Melanjutkan',
-                ),
-                SizedBox(height: 0.03.sh),
-                AuthTextField(
-                  controller: _controllerEmail,
-                  validator: _validatorEmail,
-                  hintText: 'Email',
-                  label: 'Email',
-                ),
-                SizedBox(height: 0.02.sh),
-                AuthTextField(
-                  controller: _controllerPassword,
-                  validator: _validatorPassword,
-                  hintText: 'Password',
-                  label: 'Password',
-                ),
-                SizedBox(height: 0.02.sh),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SubmitButton(text: 'Login', onTap: _onSubmit),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Lupa Password?'),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 0.025.sh),
-                TextButton(
-                  onPressed: () => router.push('/register'),
-                  child: const Text('Belum Punya Akun? Buat Akun'),
-                ),
-              ],
-            ),
+          const HeaderFormAuth(
+            heading: 'Masuk',
+            subheading: 'Masuk Untuk Melanjutkan',
+          ),
+          SizedBox(height: 0.03.sh),
+          AuthTextField(
+            controller: _controllerEmail,
+            validator: _validatorEmail,
+            hintText: 'Email',
+            label: 'Email',
+          ),
+          SizedBox(height: 0.02.sh),
+          AuthTextField(
+            controller: _controllerPassword,
+            validator: _validatorPassword,
+            hintText: 'Password',
+            label: 'Password',
+          ),
+          SizedBox(height: 0.02.sh),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SubmitButton(text: 'Login', onTap: _onSubmit),
+              TextButton(
+                onPressed: () {},
+                child: const Text('Lupa Password?'),
+              ),
+            ],
+          ),
+          SizedBox(height: 0.025.sh),
+          TextButton(
+            onPressed: () => router.push('/register'),
+            child: const Text('Belum Punya Akun? Buat Akun'),
           ),
         ],
       ),

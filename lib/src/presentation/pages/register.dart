@@ -69,61 +69,59 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 1.sw,
-        margin: EdgeInsets.symmetric(
-          horizontal: ScreenUtil().orientation == Orientation.portrait
-              ? 0.05.sw
-              : 0.25.sw,
-          vertical: 0.05.sh,
-        ),
-        padding: EdgeInsets.symmetric(vertical: 0.03.sh, horizontal: 0.05.sw),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const HeaderFormAuth(
-              heading: 'Buat Akun',
-              subheading: 'Buat Akun Untuk Melanjutkan',
-            ),
-            SizedBox(height: 0.03.sh),
-            AuthTextField(
-              controller: _controllerName,
-              validator: _validatorName,
-              hintText: 'Nama',
-              label: 'Nama',
-            ),
-            SizedBox(height: 0.02.sh),
-            AuthTextField(
-              controller: _controllerEmail,
-              validator: _validatorEmail,
-              hintText: 'Email',
-              label: 'Email',
-            ),
-            SizedBox(height: 0.02.sh),
-            AuthTextField(
-              controller: _controllerPassword,
-              validator: _validatorPassword,
-              hintText: 'Password',
-              label: 'Password',
-            ),
-            SizedBox(height: 0.02.sh),
-            Container(
-              width: double.infinity,
-              alignment: Alignment.centerLeft,
-              child: SubmitButton(text: 'Simpan', onTap: _setUser),
-            ),
-            SizedBox(height: 0.025.sh),
-            TextButton(
-              onPressed: () => router.go('/login'),
-              child: const Text('Sudah Punya Akun?'),
-            ),
-          ],
-        ),
+    return Container(
+      width: 1.sw,
+      margin: EdgeInsets.symmetric(
+        horizontal: ScreenUtil().orientation == Orientation.portrait
+            ? 0.05.sw
+            : 0.25.sw,
+        vertical: 0.05.sh,
+      ),
+      padding: EdgeInsets.symmetric(vertical: 0.03.sh, horizontal: 0.05.sw),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const HeaderFormAuth(
+            heading: 'Buat Akun',
+            subheading: 'Buat Akun Untuk Melanjutkan',
+          ),
+          SizedBox(height: 0.03.sh),
+          AuthTextField(
+            controller: _controllerName,
+            validator: _validatorName,
+            hintText: 'Nama',
+            label: 'Nama',
+          ),
+          SizedBox(height: 0.02.sh),
+          AuthTextField(
+            controller: _controllerEmail,
+            validator: _validatorEmail,
+            hintText: 'Email',
+            label: 'Email',
+          ),
+          SizedBox(height: 0.02.sh),
+          AuthTextField(
+            controller: _controllerPassword,
+            validator: _validatorPassword,
+            hintText: 'Password',
+            label: 'Password',
+          ),
+          SizedBox(height: 0.02.sh),
+          Container(
+            width: double.infinity,
+            alignment: Alignment.centerLeft,
+            child: SubmitButton(text: 'Simpan', onTap: _setUser),
+          ),
+          SizedBox(height: 0.025.sh),
+          TextButton(
+            onPressed: () => router.go('/login'),
+            child: const Text('Sudah Punya Akun?'),
+          ),
+        ],
       ),
     );
   }
