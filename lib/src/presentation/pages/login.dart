@@ -1,0 +1,111 @@
+import 'package:agrihub/src/domain/services/s_auth.dart';
+import 'package:agrihub/src/presentation/widgets/atom/submit_button.dart';
+import 'package:agrihub/src/utils/account.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:agrihub/src/app/routes/routes.dart';
+import 'package:agrihub/src/app/use_cases/textfield_validator.dart';
+import 'package:agrihub/src/presentation/widgets/atom/auth_text_field.dart';
+import 'package:agrihub/src/presentation/widgets/organism/header_form_auth.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _controllerEmail = TextEditingController();
+  final _controllerPassword = TextEditingController();
+  final _validatorEmail = TextfieldValidator.email;
+  final _validatorPassword = TextfieldValidator.password;
+
+  void _onSubmit() async {
+    if (_validatorEmail(_controllerEmail.text) != null ||
+        _validatorPassword(_controllerPassword.text) != null) {
+      return;
+    }
+    final response = await AuthenticationService()
+        .signIn(_controllerEmail.text, _controllerPassword.text);
+    if (response == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Email atau Password Salah'),
+        ),
+      );
+      return;
+    }
+    userLoggedIn = response;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Berhasil Masuk'),
+      ),
+    );
+
+    router.go('/dashboard');
+  }
+
+  @override
+  void dispose() {
+    _controllerEmail.dispose();
+    _controllerPassword.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: 1.sw,
+        height: 0.5.sh,
+        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
+        padding: EdgeInsets.symmetric(vertical: 0.03.sh, horizontal: 0.05.sw),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const HeaderFormAuth(
+              heading: 'Masuk',
+              subheading: 'Masuk Untuk Melanjutkan',
+            ),
+            SizedBox(height: 0.03.sh),
+            AuthTextField(
+              controller: _controllerEmail,
+              validator: _validatorEmail,
+              hintText: 'Email',
+              label: 'Email',
+            ),
+            SizedBox(height: 0.02.sh),
+            AuthTextField(
+              controller: _controllerPassword,
+              validator: _validatorPassword,
+              hintText: 'Password',
+              label: 'Password',
+            ),
+            SizedBox(height: 0.02.sh),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SubmitButton(text: 'Login', onTap: _onSubmit),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Lupa Password?'),
+                ),
+              ],
+            ),
+            SizedBox(height: 0.025.sh),
+            TextButton(
+              onPressed: () => router.push('/register'),
+              child: const Text('Belum Punya Akun? Buat Akun'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
