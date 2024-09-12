@@ -43,7 +43,6 @@ class _LoginPageState extends State<LoginPage> {
         content: Text('Berhasil Masuk'),
       ),
     );
-
     router.go('/dashboard');
   }
 
