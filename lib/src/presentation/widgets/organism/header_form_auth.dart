@@ -5,8 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class HeaderFormAuth extends StatelessWidget {
   final String heading;
   final String subheading;
-  const HeaderFormAuth(
-      {super.key, required this.heading, required this.subheading});
+  final bool? includeToggle;
+  const HeaderFormAuth({
+    super.key,
+    required this.heading,
+    required this.subheading,
+    this.includeToggle = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +45,7 @@ class HeaderFormAuth extends StatelessWidget {
             ],
           ),
         ),
-        const ToggleUIModeButton(),
+        includeToggle! ? const ToggleUIModeButton() : const SizedBox(),
       ],
     );
   }
