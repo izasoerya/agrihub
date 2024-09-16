@@ -13,6 +13,7 @@ import 'package:agrihub/src/presentation/widgets/organism/header_device.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_profile.dart';
 import 'package:agrihub/src/presentation/widgets/atom/modal_bottom_sheet.dart';
 import 'package:agrihub/src/utils/account.dart';
+import 'package:agrihub/src/utils/date_formatter.dart';
 import 'package:agrihub/src/utils/textfield_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -112,7 +113,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     children: [
                       HeaderDevice(
                         heading: devices[0]!.displayName,
-                        subheading: plants[0]!.checkedAt.toString(),
+                        subheading:
+                            DateFormatter.dateTimeID(plants[0]!.checkedAt),
                         includeToggle: false,
                       ),
                       SizedBox(width: 0.05.sw),
