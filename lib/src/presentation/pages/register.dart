@@ -1,3 +1,4 @@
+import 'package:agrihub/src/utils/textfield_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uuid/uuid.dart';
@@ -5,10 +6,9 @@ import 'package:uuid/uuid.dart';
 import 'package:agrihub/src/app/routes/routes.dart';
 import 'package:agrihub/src/domain/entities/e_auth.dart';
 import 'package:agrihub/src/domain/services/s_auth.dart';
-import 'package:agrihub/src/app/use_cases/textfield_validator.dart';
 import 'package:agrihub/src/presentation/widgets/atom/submit_button.dart';
 import 'package:agrihub/src/presentation/widgets/atom/auth_text_field.dart';
-import 'package:agrihub/src/presentation/widgets/organism/header_form_auth.dart';
+import 'package:agrihub/src/presentation/widgets/organism/header_content.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,9 +22,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final _controllerName = TextEditingController();
   final _controllerEmail = TextEditingController();
   final _controllerPassword = TextEditingController();
-  final _validatorName = TextfieldValidator.name;
-  final _validatorEmail = TextfieldValidator.email;
-  final _validatorPassword = TextfieldValidator.password;
+  final _validatorName = TextFieldHandler.name;
+  final _validatorEmail = TextFieldHandler.email;
+  final _validatorPassword = TextFieldHandler.password;
 
   void _setUser() {
     final user = EntitiesAuth(
@@ -57,6 +57,9 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
     router.go('/login');
+    setState(() => TextFieldHandler().clearTextField(
+          [_controllerName, _controllerEmail, _controllerPassword],
+        ));
   }
 
   @override
@@ -85,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const HeaderFormAuth(
+          const HeaderContent(
             heading: 'Buat Akun',
             subheading: 'Buat Akun Untuk Melanjutkan',
           ),

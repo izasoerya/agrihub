@@ -1,13 +1,13 @@
 import 'package:agrihub/src/domain/services/s_auth.dart';
 import 'package:agrihub/src/presentation/widgets/atom/submit_button.dart';
 import 'package:agrihub/src/utils/account.dart';
+import 'package:agrihub/src/utils/textfield_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:agrihub/src/app/routes/routes.dart';
-import 'package:agrihub/src/app/use_cases/textfield_validator.dart';
 import 'package:agrihub/src/presentation/widgets/atom/auth_text_field.dart';
-import 'package:agrihub/src/presentation/widgets/organism/header_form_auth.dart';
+import 'package:agrihub/src/presentation/widgets/organism/header_content.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,8 +19,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _controllerEmail = TextEditingController();
   final _controllerPassword = TextEditingController();
-  final _validatorEmail = TextfieldValidator.email;
-  final _validatorPassword = TextfieldValidator.password;
+  final _validatorEmail = TextFieldHandler.email;
+  final _validatorPassword = TextFieldHandler.password;
 
   void _onSubmit() async {
     if (_validatorEmail(_controllerEmail.text) != null ||
@@ -43,7 +43,11 @@ class _LoginPageState extends State<LoginPage> {
         content: Text('Berhasil Masuk'),
       ),
     );
-    router.go('/dashboard');
+    router.push('/dashboard');
+    setState(() {
+      TextFieldHandler()
+          .clearTextField([_controllerEmail, _controllerPassword]);
+    });
   }
 
   @override
@@ -71,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const HeaderFormAuth(
+          const HeaderContent(
             heading: 'Masuk',
             subheading: 'Masuk Untuk Melanjutkan',
           ),
