@@ -1,5 +1,7 @@
 import 'package:agrihub/src/app/use_cases/add_device_handler.dart';
 import 'package:agrihub/src/presentation/widgets/atom/auth_text_field.dart';
+import 'package:agrihub/src/presentation/widgets/atom/data_box.dart';
+import 'package:agrihub/src/presentation/widgets/atom/info_box.dart';
 import 'package:agrihub/src/presentation/widgets/atom/submit_button.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_content.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_profile.dart';
@@ -67,11 +69,37 @@ class _DashboardPageState extends State<DashboardPage> {
                 .addDevice(callBack)),
       ],
     );
-    return Column(
-      children: [
-        const HeaderProfile(),
-        ModalBottomSheet(content: contentBottomSheet),
-      ],
+    return SizedBox(
+      width: 1.sw,
+      child: Column(
+        children: [
+          const HeaderProfile(),
+          SizedBox(height: 0.025.sh),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const HeaderContent(
+                heading: 'Tambahkan Device',
+                subheading: 'Tambahkan device baru',
+                includeToggle: false,
+              ),
+              ModalBottomSheet(content: contentBottomSheet),
+            ],
+          ),
+          SizedBox(height: 0.025.sh),
+          InfoBox(
+            title: 'Info',
+            data: 'This is an info box',
+            icon: Icons.info,
+          ),
+          SizedBox(height: 0.025.sh),
+          DataBox(
+            title: 'Kelembapan',
+            data: '29.2',
+            icon: Icons.water,
+          ),
+        ],
+      ),
     );
   }
 }

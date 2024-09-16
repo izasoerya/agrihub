@@ -34,7 +34,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
           ),
         );
       },
-      icon: const Icon(Icons.add_circle_rounded),
+      icon: Icon(Icons.add_circle_rounded, size: 0.1.sw),
     );
   }
 }
