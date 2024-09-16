@@ -1,4 +1,8 @@
 import 'package:agrihub/src/app/use_cases/add_device_handler.dart';
+import 'package:agrihub/src/domain/entities/e_device.dart';
+import 'package:agrihub/src/domain/entities/e_plant.dart';
+import 'package:agrihub/src/domain/services/s_device.dart';
+import 'package:agrihub/src/domain/services/s_plant.dart';
 import 'package:agrihub/src/presentation/widgets/atom/auth_text_field.dart';
 import 'package:agrihub/src/presentation/widgets/atom/chart_table.dart';
 import 'package:agrihub/src/presentation/widgets/atom/data_box.dart';
@@ -8,6 +12,7 @@ import 'package:agrihub/src/presentation/widgets/organism/header_content.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_device.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_profile.dart';
 import 'package:agrihub/src/presentation/widgets/atom/modal_bottom_sheet.dart';
+import 'package:agrihub/src/utils/account.dart';
 import 'package:agrihub/src/utils/textfield_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +25,9 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  late List<EntitiesDevice?> devices;
+  late List<EntitiesPlant?> plants;
+
   final _controllerName = TextEditingController();
   final _controllerUID = TextEditingController();
 
@@ -38,6 +46,16 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
     Navigator.pop(context);
+  }
+
+  Future<bool> _getDevices() async {
+    devices = await DeviceService().getAllDevice(userLoggedIn.uid);
+    if (devices != [null]) {
+      plants = await Future.wait(devices.map((e) async {
+        return await PlantService().getPlant(e!.plantUID);
+      }).toList());
+    }
+    return true;
   }
 
   @override
@@ -71,44 +89,60 @@ class _DashboardPageState extends State<DashboardPage> {
                 .addDevice(callBack)),
       ],
     );
-    return SizedBox(
-      width: ScreenUtil().orientation == Orientation.portrait ? 1.sw : 0.8.sw,
-      child: Column(
-        children: [
-          const HeaderProfile(),
-          SizedBox(height: 0.02.sh),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return FutureBuilder(
+      future: _getDevices(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasData) {
+          return SizedBox(
+            width: ScreenUtil().orientation == Orientation.portrait
+                ? 1.sw
+                : 0.8.sw,
+            child: Column(
               children: [
-                const HeaderDevice(
-                  heading: 'Anggrek Halaman Depan',
-                  subheading: 'Senin, 17 Agustus 1945 \nTerakhir Update: 20.23',
-                  includeToggle: false,
+                const HeaderProfile(),
+                SizedBox(height: 0.02.sh),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      HeaderDevice(
+                        heading: devices[0]!.displayName,
+                        subheading: plants[0]!.checkedAt.toString(),
+                        includeToggle: false,
+                      ),
+                      SizedBox(width: 0.05.sw),
+                      ModalBottomSheet(content: contentBottomSheet),
+                    ],
+                  ),
                 ),
-                SizedBox(width: 0.05.sw),
-                ModalBottomSheet(content: contentBottomSheet),
+                SizedBox(height: 0.03.sh),
+                const InfoBox(
+                  title: 'Rekomendasi',
+                  data: 'Cari Pacar Sana',
+                  icon: Icons.info,
+                ),
+                SizedBox(height: 0.025.sh),
+                DataBox(
+                  title: 'Kelembapan',
+                  data: '${plants[0]!.humidity}% RH',
+                  icon: Icons.water,
+                ),
+                SizedBox(height: 0.025.sh),
+                const ChartTable(),
+                SizedBox(height: 0.075.sh),
               ],
             ),
-          ),
-          SizedBox(height: 0.03.sh),
-          const InfoBox(
-            title: 'Rekomendasi',
-            data: 'Cari Pacar Sana',
-            icon: Icons.info,
-          ),
-          SizedBox(height: 0.025.sh),
-          const DataBox(
-            title: 'Kelembapan',
-            data: '69.42% RH',
-            icon: Icons.water,
-          ),
-          SizedBox(height: 0.025.sh),
-          ChartTable(),
-          SizedBox(height: 0.075.sh),
-        ],
-      ),
+          );
+        }
+        return const Center(
+          child: Text('Error'),
+        );
+      },
     );
   }
 }
