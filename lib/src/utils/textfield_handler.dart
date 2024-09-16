@@ -1,4 +1,17 @@
-class TextfieldValidator {
+import 'package:flutter/material.dart';
+
+class TextFieldHandler {
+  void clearTextField(List<TextEditingController> controllers) {
+    for (var controller in controllers) {
+      controller.clear();
+    }
+  }
+
+  static get validatorEmail => email;
+  static get validatorPassword => password;
+  static get validatorName => name;
+  static get validatorID => id;
+
   static String? name(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your name';
