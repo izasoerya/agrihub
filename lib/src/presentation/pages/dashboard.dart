@@ -4,6 +4,7 @@ import 'package:agrihub/src/presentation/widgets/atom/data_box.dart';
 import 'package:agrihub/src/presentation/widgets/atom/info_box.dart';
 import 'package:agrihub/src/presentation/widgets/atom/submit_button.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_content.dart';
+import 'package:agrihub/src/presentation/widgets/organism/header_device.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_profile.dart';
 import 'package:agrihub/src/presentation/widgets/atom/modal_bottom_sheet.dart';
 import 'package:agrihub/src/utils/textfield_handler.dart';
@@ -70,30 +71,34 @@ class _DashboardPageState extends State<DashboardPage> {
       ],
     );
     return SizedBox(
-      width: 1.sw,
+      width: ScreenUtil().orientation == Orientation.portrait ? 1.sw : 0.8.sw,
       child: Column(
         children: [
           const HeaderProfile(),
-          SizedBox(height: 0.025.sh),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const HeaderContent(
-                heading: 'Tambahkan Device',
-                subheading: 'Tambahkan device baru',
-                includeToggle: false,
-              ),
-              ModalBottomSheet(content: contentBottomSheet),
-            ],
+          SizedBox(height: 0.02.sh),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const HeaderDevice(
+                  heading: 'Anggrek Halaman Depan',
+                  subheading: 'Senin, 17 Agustus 1945 \nTerakhir Update: 20.23',
+                  includeToggle: false,
+                ),
+                SizedBox(width: 0.05.sw),
+                ModalBottomSheet(content: contentBottomSheet),
+              ],
+            ),
           ),
-          SizedBox(height: 0.025.sh),
-          InfoBox(
-            title: 'Info',
-            data: 'This is an info box',
+          SizedBox(height: 0.03.sh),
+          const InfoBox(
+            title: 'Rekomendasi',
+            data: 'Cari Pacar Sana',
             icon: Icons.info,
           ),
           SizedBox(height: 0.025.sh),
-          DataBox(
+          const DataBox(
             title: 'Kelembapan',
             data: '29.2',
             icon: Icons.water,

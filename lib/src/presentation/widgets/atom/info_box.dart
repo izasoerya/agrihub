@@ -17,7 +17,7 @@ class InfoBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 0.05.sw, vertical: 0.015.sh),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(10),
@@ -30,25 +30,32 @@ class InfoBox extends StatelessWidget {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.info, color: Colors.blue),
               const SizedBox(width: 10),
-              Text('Info',
-                  style:
-                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+              Text(title,
+                  style: TextStyle(
+                      fontSize: ScreenUtil().orientation == Orientation.portrait
+                          ? 14.sp
+                          : 8.sp,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
           SizedBox(height: 0.025.sh),
           Text(
-            'This is an info box',
+            data,
             style: TextStyle(
-              fontSize: 18.sp,
+              fontSize: ScreenUtil().orientation == Orientation.portrait
+                  ? 12.sp
+                  : 6.sp,
               fontWeight: FontWeight.normal,
               color: Theme.of(context).textTheme.bodyMedium!.color,
             ),
+            textAlign: TextAlign.start,
           ),
         ],
       ),

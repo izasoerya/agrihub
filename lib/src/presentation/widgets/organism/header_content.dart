@@ -21,6 +21,7 @@ class HeaderContent extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -32,7 +33,10 @@ class HeaderContent extends StatelessWidget {
                       : 12.sp,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.start,
+                overflow: TextOverflow.visible,
               ),
+              Padding(padding: EdgeInsets.only(top: 0.01.sh)),
               Text(
                 subheading,
                 style: TextStyle(
@@ -41,6 +45,7 @@ class HeaderContent extends StatelessWidget {
                       ? 12.sp
                       : 8.sp,
                 ),
+                textAlign: TextAlign.start,
               ),
             ],
           ),

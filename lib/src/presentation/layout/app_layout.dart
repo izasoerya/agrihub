@@ -7,7 +7,14 @@ class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(child: SafeArea(child: child)),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+              width: double.infinity,
+              alignment: Alignment.topCenter,
+              child: child),
+        ),
+      ),
     );
   }
 }

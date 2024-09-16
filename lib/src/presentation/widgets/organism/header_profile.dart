@@ -1,6 +1,7 @@
 import 'package:agrihub/src/presentation/widgets/atom/toggle_ui_mode.dart';
 import 'package:agrihub/src/utils/account.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderProfile extends StatelessWidget {
@@ -29,7 +30,9 @@ class HeaderProfile extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                radius: 25.sp,
+                radius: ScreenUtil().orientation == Orientation.portrait
+                    ? 25.sp
+                    : 15.sp,
                 backgroundImage:
                     const AssetImage('assets/images/default_profile.png'),
               ),
@@ -39,13 +42,25 @@ class HeaderProfile extends StatelessWidget {
                 children: [
                   Text(
                     'Selamat Datang,',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
+                      fontSize: ScreenUtil().orientation == Orientation.portrait
+                          ? 16.sp
+                          : 8.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.start,
                   ),
                   const SizedBox(height: 10),
                   Text(
                     userLoggedIn.displayName,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
+                      fontSize: ScreenUtil().orientation == Orientation.portrait
+                          ? 14.sp
+                          : 7.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.start,
                   ),
                 ],

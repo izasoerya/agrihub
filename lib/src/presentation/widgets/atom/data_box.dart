@@ -37,15 +37,20 @@ class DataBox extends StatelessWidget {
               Icon(icon, color: Colors.blue),
               const SizedBox(width: 10),
               Text(title,
-                  style:
-                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      fontSize: ScreenUtil().orientation == Orientation.portrait
+                          ? 14.sp
+                          : 8.sp,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
           SizedBox(height: 0.025.sh),
           Text(
             data,
             style: TextStyle(
-              fontSize: 32.sp,
+              fontSize: ScreenUtil().orientation == Orientation.portrait
+                  ? 16.sp
+                  : 10.sp,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).textTheme.bodyMedium!.color,
             ),

@@ -34,7 +34,9 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
           ),
         );
       },
-      icon: Icon(Icons.add_circle_rounded, size: 0.1.sw),
+      icon: Icon(Icons.add_circle_rounded,
+          size:
+              ScreenUtil().orientation == Orientation.portrait ? 40.sp : 20.sp),
     );
   }
 }

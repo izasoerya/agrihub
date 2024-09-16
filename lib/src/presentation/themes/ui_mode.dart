@@ -4,8 +4,9 @@ class UiMode {
   static final darkMode = ThemeData(
     scaffoldBackgroundColor: Colors.grey[900],
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white),
+      bodySmall: TextStyle(color: Colors.white70),
       bodyMedium: TextStyle(color: Colors.white70),
+      bodyLarge: TextStyle(color: Colors.white),
     ),
     appBarTheme: const AppBarTheme(
       color: Colors.teal,
