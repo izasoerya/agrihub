@@ -11,6 +11,7 @@ class AppendDeviceHandler {
     if (TextFieldHandler.validatorName(formName.text) == null &&
         TextFieldHandler.validatorID(formUID.text) == null) {
       // TODO: Add device to database
+
       setState();
     }
   }
