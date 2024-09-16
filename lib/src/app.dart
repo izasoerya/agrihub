@@ -1,3 +1,4 @@
+import 'package:agrihub/src/app/blocs/device_state.dart';
 import 'package:agrihub/src/app/blocs/theme_state.dart';
 import 'package:agrihub/src/presentation/themes/ui_mode.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       minTextAdapt: true,
-      child: BlocProvider(
-        create: (context) => ThemeStateBloc(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<ThemeStateBloc>(
+            create: (context) => ThemeStateBloc(),
+          ),
+          BlocProvider<DeviceStateBloc>(
+            create: (context) => DeviceStateBloc(),
+          ),
+        ],
         child: BlocBuilder<ThemeStateBloc, ThemeState>(
           builder: (context, state) {
             return MaterialApp.router(
