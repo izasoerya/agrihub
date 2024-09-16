@@ -1,3 +1,4 @@
+import 'package:agrihub/src/app/use_cases/add_device_handler.dart';
 import 'package:agrihub/src/presentation/widgets/atom/auth_text_field.dart';
 import 'package:agrihub/src/presentation/widgets/atom/submit_button.dart';
 import 'package:agrihub/src/presentation/widgets/organism/header_content.dart';
@@ -20,6 +21,20 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final _validatorName = TextFieldHandler.validatorName;
   final _validatorID = TextFieldHandler.validatorID;
+
+  void callBack() {
+    setState(() {
+      TextFieldHandler().clearTextField(
+        [_controllerName, _controllerUID],
+      );
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Alat berhasil ditambahkan'),
+      ),
+    );
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +63,8 @@ class _DashboardPageState extends State<DashboardPage> {
         SizedBox(height: 0.03.sh),
         SubmitButton(
             text: 'Tambahkan',
-            onTap: () {
-              if (_validatorName(_controllerName.text) == null &&
-                  _validatorID(_controllerUID.text) == null) {
-                // TODO: Add device to database
-                setState(() => TextFieldHandler().clearTextField(
-                      [_controllerName, _controllerUID],
-                    ));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Device berhasil ditambahkan'),
-                  ),
-                );
-              }
-              Navigator.pop(context);
-            }),
+            onTap: () => AppendDeviceHandler(_controllerName, _controllerUID)
+                .addDevice(callBack)),
       ],
     );
     return Column(
