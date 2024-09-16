@@ -38,9 +38,18 @@ class InfrastructureDevice implements RepositoryDevice {
   }
 
   @override
-  Future<EntitiesDevice?> updateDevice(EntitiesDevice device) {
-    // TODO: implement updateDevice
-    throw UnimplementedError();
+  Future<EntitiesDevice?> updateDevice(EntitiesDevice device) async {
+    DocumentSnapshot doc = await db
+        .collection('device')
+        .doc(device.uid)
+        .update(device.toJson())
+        .then((value) => db.collection('device').doc(device.uid).get());
+    if (doc.exists) {
+      return EntitiesDevice.fromJson(doc.data() as Map<String, dynamic>);
+    } else {
+      print('Document does not exist');
+      return null;
+    }
   }
 
   @override

@@ -14,6 +14,19 @@ class DeviceService {
 
   Future<EntitiesDevice?> addDevice(EntitiesDevice device) async {
     try {
+      final response = await InfrastructureDevice().readDevice(device.uid);
+      if (response != null) {
+        List<String> plantUID = response.plantUID;
+        plantUID.add(device.plantUID[0]);
+        final data = await InfrastructureDevice()
+            .updateDevice(device.copyWith(plantUID: plantUID));
+        return data;
+      }
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+    try {
       final response = await InfrastructureDevice().createDevice(device);
       return response;
     } on Exception catch (e) {
