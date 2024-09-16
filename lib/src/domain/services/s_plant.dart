@@ -11,4 +11,14 @@ class PlantService {
       return [null];
     }
   }
+
+  Future<EntitiesPlant?> getPlant(String uid) async {
+    try {
+      final response = await InfrastructurePlant().readPlant(uid);
+      return response;
+    } on Exception catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
 }

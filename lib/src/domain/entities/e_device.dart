@@ -1,7 +1,7 @@
 class EntitiesDevice {
   final String uid;
   final String displayName;
-  final List<String> plantUID;
+  final String plantUID;
   final String userUID;
 
   EntitiesDevice({
@@ -14,7 +14,7 @@ class EntitiesDevice {
   EntitiesDevice copyWith({
     String? uid,
     String? displayName,
-    List<String>? plantUID,
+    String? plantUID,
     String? userUID,
   }) {
     return EntitiesDevice(
@@ -28,8 +28,8 @@ class EntitiesDevice {
   factory EntitiesDevice.fromJson(Map<String, dynamic> json) {
     return EntitiesDevice(
       uid: json['deviceUID'],
-      displayName: json['displayName'],
-      plantUID: List<String>.from(json['plantUID']),
+      displayName: json['deviceName'],
+      plantUID: json['plantUID'],
       userUID: json['userUID'],
     );
   }

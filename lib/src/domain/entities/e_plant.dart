@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class EntitiesPlant {
   final String uid;
   final double humidity;
@@ -24,8 +26,8 @@ class EntitiesPlant {
   factory EntitiesPlant.fromJson(Map<String, dynamic> json) {
     return EntitiesPlant(
       uid: json['plantUID'],
-      humidity: json['humidity'],
-      checkedAt: DateTime.parse(json['checkedAt']),
+      humidity: double.parse(json['humidity'].toString()),
+      checkedAt: (json['checkedAt'] as Timestamp).toDate(),
     );
   }
 
@@ -33,7 +35,7 @@ class EntitiesPlant {
     return {
       'plantUID': uid,
       'humidity': humidity,
-      'checkedAt': checkedAt.toIso8601String(),
+      'checkedAt': Timestamp.fromDate(checkedAt),
     };
   }
 }
