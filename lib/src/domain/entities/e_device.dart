@@ -1,47 +1,42 @@
 import 'package:agrihub/src/domain/entities/e_plant.dart';
 
 class EntitiesDevice {
-  final String deviceUID;
-  final String plantUID;
+  final String uid;
+  final List<String> plantUID;
   final String userUID;
-  final EntitiesPlant plant;
 
   EntitiesDevice({
-    required this.deviceUID,
+    required this.uid,
     required this.plantUID,
     required this.userUID,
-    required this.plant,
   });
 
   EntitiesDevice copyWith({
-    String? deviceUID,
-    String? plantUID,
+    String? uid,
+    List<String>? plantUID,
     String? userUID,
     EntitiesPlant? plant,
   }) {
     return EntitiesDevice(
-      deviceUID: deviceUID ?? this.deviceUID,
+      uid: uid ?? this.uid,
       plantUID: plantUID ?? this.plantUID,
       userUID: userUID ?? this.userUID,
-      plant: plant ?? this.plant,
     );
   }
 
   factory EntitiesDevice.fromJson(Map<String, dynamic> json) {
     return EntitiesDevice(
-      deviceUID: json['deviceUID'],
-      plantUID: json['plantUID'],
+      uid: json['deviceUID'],
+      plantUID: List<String>.from(json['plantUID']),
       userUID: json['userUID'],
-      plant: EntitiesPlant.fromJson(json['plant']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'deviceUID': deviceUID,
+      'deviceUID': uid,
       'plantUID': plantUID,
       'userUID': userUID,
-      'plant': plant.toJson(),
     };
   }
 }
