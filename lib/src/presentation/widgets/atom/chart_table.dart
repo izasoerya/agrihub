@@ -32,12 +32,9 @@ class ChartTable extends StatelessWidget {
         ],
       ),
       child: SfCartesianChart(
-        primaryXAxis: CategoryAxis(),
-        // Chart title
-        title: ChartTitle(text: 'Grafik Beberapa Bulan Terakhir'),
-        // Enable legend
-        legend: Legend(isVisible: true),
-        // Enable tooltip
+        primaryXAxis: const CategoryAxis(),
+        title: const ChartTitle(text: 'Grafik Beberapa Bulan Terakhir'),
+        legend: const Legend(isVisible: true),
         tooltipBehavior: TooltipBehavior(enable: true),
         series: <CartesianSeries<_SalesData, String>>[
           LineSeries<_SalesData, String>(
@@ -45,8 +42,7 @@ class ChartTable extends StatelessWidget {
               xValueMapper: (_SalesData sales, _) => sales.year,
               yValueMapper: (_SalesData sales, _) => sales.sales,
               name: 'Kelembapan (%RH)',
-              // Enable data label
-              dataLabelSettings: DataLabelSettings(isVisible: true))
+              dataLabelSettings: const DataLabelSettings(isVisible: true))
         ],
       ),
     );
