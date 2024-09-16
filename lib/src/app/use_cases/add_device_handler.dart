@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 class AppendDeviceHandler {
   final TextEditingController formName;
   final TextEditingController formUID;
-  final Uuid _uuid = Uuid();
+  final Uuid _uuid = const Uuid();
   AppendDeviceHandler(this.formName, this.formUID);
 
   void addDevice(void Function() setState) {
@@ -18,7 +18,7 @@ class AppendDeviceHandler {
         uid: _uuid.v4(),
         userUID: userLoggedIn.uid,
         displayName: formName.text,
-        plantUID: [formUID.text],
+        plantUID: formUID.text,
       ));
       setState();
     }
