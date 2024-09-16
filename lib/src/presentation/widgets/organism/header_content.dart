@@ -2,11 +2,11 @@ import 'package:agrihub/src/presentation/widgets/atom/toggle_ui_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HeaderFormAuth extends StatelessWidget {
+class HeaderContent extends StatelessWidget {
   final String heading;
   final String subheading;
   final bool? includeToggle;
-  const HeaderFormAuth({
+  const HeaderContent({
     super.key,
     required this.heading,
     required this.subheading,
