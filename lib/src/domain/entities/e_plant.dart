@@ -1,21 +1,21 @@
 class EntitiesPlant {
-  final String plantUID;
+  final String uid;
   final double humidity;
   final DateTime checkedAt;
 
   EntitiesPlant({
-    required this.plantUID,
+    required this.uid,
     required this.humidity,
     required this.checkedAt,
   });
 
   EntitiesPlant copyWith({
-    String? plantUID,
+    String? uid,
     double? humidity,
     DateTime? checkedAt,
   }) {
     return EntitiesPlant(
-      plantUID: plantUID ?? this.plantUID,
+      uid: uid ?? this.uid,
       humidity: humidity ?? this.humidity,
       checkedAt: checkedAt ?? this.checkedAt,
     );
@@ -23,7 +23,7 @@ class EntitiesPlant {
 
   factory EntitiesPlant.fromJson(Map<String, dynamic> json) {
     return EntitiesPlant(
-      plantUID: json['plantUID'],
+      uid: json['plantUID'],
       humidity: json['humidity'],
       checkedAt: DateTime.parse(json['checkedAt']),
     );
@@ -31,7 +31,7 @@ class EntitiesPlant {
 
   Map<String, dynamic> toJson() {
     return {
-      'plantUID': plantUID,
+      'plantUID': uid,
       'humidity': humidity,
       'checkedAt': checkedAt.toIso8601String(),
     };
