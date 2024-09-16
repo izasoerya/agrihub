@@ -1,5 +1,6 @@
 import 'package:agrihub/src/app/use_cases/add_device_handler.dart';
 import 'package:agrihub/src/presentation/widgets/atom/auth_text_field.dart';
+import 'package:agrihub/src/presentation/widgets/atom/chart_table.dart';
 import 'package:agrihub/src/presentation/widgets/atom/data_box.dart';
 import 'package:agrihub/src/presentation/widgets/atom/info_box.dart';
 import 'package:agrihub/src/presentation/widgets/atom/submit_button.dart';
@@ -103,6 +104,9 @@ class _DashboardPageState extends State<DashboardPage> {
             data: '69.42% RH',
             icon: Icons.water,
           ),
+          SizedBox(height: 0.025.sh),
+          ChartTable(),
+          SizedBox(height: 0.075.sh),
         ],
       ),
     );
