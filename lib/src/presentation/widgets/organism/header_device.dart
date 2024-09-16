@@ -94,6 +94,7 @@ class _HeaderDeviceState extends State<HeaderDevice> {
                   fontSize: ScreenUtil().orientation == Orientation.portrait
                       ? 12.sp
                       : 6.sp,
+                  fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.start,
                 maxLines: null, // Allow multiline text

@@ -49,7 +49,7 @@ class DataBox extends StatelessWidget {
             data,
             style: TextStyle(
               fontSize: ScreenUtil().orientation == Orientation.portrait
-                  ? 16.sp
+                  ? 24.sp
                   : 10.sp,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).textTheme.bodyMedium!.color,

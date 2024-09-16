@@ -100,7 +100,7 @@ class _DashboardPageState extends State<DashboardPage> {
           SizedBox(height: 0.025.sh),
           const DataBox(
             title: 'Kelembapan',
-            data: '29.2',
+            data: '69.42% RH',
             icon: Icons.water,
           ),
         ],
