@@ -1,4 +1,5 @@
 import 'package:agrihub/src/app/blocs/device_state.dart';
+import 'package:agrihub/src/app/blocs/firestore_stream.dart';
 import 'package:agrihub/src/app/blocs/theme_state.dart';
 import 'package:agrihub/src/presentation/themes/ui_mode.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<DeviceStateBloc>(
             create: (context) => DeviceStateBloc(),
+          ),
+          BlocProvider<FirestoreBloc>(
+            create: (context) => FirestoreBloc(),
           ),
         ],
         child: BlocBuilder<ThemeStateBloc, ThemeState>(
