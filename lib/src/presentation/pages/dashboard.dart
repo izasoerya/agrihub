@@ -1,4 +1,5 @@
 import 'package:agrihub/src/app/blocs/device_state.dart';
+import 'package:agrihub/src/app/blocs/firestore_stream.dart';
 import 'package:agrihub/src/app/use_cases/add_device_handler.dart';
 import 'package:agrihub/src/domain/entities/e_device.dart';
 import 'package:agrihub/src/domain/entities/e_plant.dart';
@@ -45,11 +46,8 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   void callBack() {
-    setState(() {
-      TextFieldHandler().clearTextField(
-        [_controllerName, _controllerUID],
-      );
-    });
+    setState(() =>
+        TextFieldHandler().clearTextField([_controllerName, _controllerUID]));
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Alat berhasil ditambahkan'),
@@ -69,7 +67,6 @@ class _DashboardPageState extends State<DashboardPage> {
       isLoading = false;
     });
 
-    // Update the Bloc state with the first device
     if (devices.isNotEmpty && devices[0] != null) {
       context
           .read<DeviceStateBloc>()
@@ -115,8 +112,8 @@ class _DashboardPageState extends State<DashboardPage> {
       );
     }
 
-    return BlocBuilder<DeviceStateBloc, DeviceState>(
-      builder: (context, state) {
+    return BlocBuilder<FirestoreBloc, FirestoreState>(
+      builder: (context, event) {
         return SizedBox(
           width:
               ScreenUtil().orientation == Orientation.portrait ? 1.sw : 0.8.sw,
@@ -129,12 +126,16 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    HeaderDevice(
-                      heading: state.device?.displayName ?? 'Device',
-                      subheading:
-                          DateFormatter.dateTimeID(plants[0]!.checkedAt),
-                      includeToggle: false,
-                    ),
+                    BlocBuilder<DeviceStateBloc, DeviceState>(
+                        builder: (context, snapshot) {
+                      return HeaderDevice(
+                        heading:
+                            snapshot.device?.displayName ?? 'Tidak ada alat',
+                        subheading:
+                            DateFormatter.dateTimeID(plants[0]!.checkedAt),
+                        includeToggle: false,
+                      );
+                    }),
                     SizedBox(width: 0.05.sw),
                     ModalBottomSheet(content: contentBottomSheet),
                   ],
@@ -149,7 +150,7 @@ class _DashboardPageState extends State<DashboardPage> {
               SizedBox(height: 0.025.sh),
               DataBox(
                 title: 'Kelembapan',
-                data: '${plants[0]!.humidity}% RH',
+                data: '${event.doc[0]!.humidity}% RH',
                 icon: Icons.water,
               ),
               SizedBox(height: 0.025.sh),
