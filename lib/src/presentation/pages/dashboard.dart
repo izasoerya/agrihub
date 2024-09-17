@@ -129,6 +129,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     BlocBuilder<DeviceStateBloc, DeviceState>(
                         builder: (context, snapshot) {
                       return HeaderDevice(
+                        list: devices.map((e) => e!).toList(),
                         heading:
                             snapshot.device?.displayName ?? 'Tidak ada alat',
                         subheading:
