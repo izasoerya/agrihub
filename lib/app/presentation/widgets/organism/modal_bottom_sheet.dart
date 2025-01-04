@@ -171,20 +171,26 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
           type: TextInputType.phone,
         ),
         SizedBox(height: 0.015.sh),
-        AuthTextField(
-          controller: _latitudeController,
-          hintText: 'Latitude',
-          label: 'Latitude',
-          optional: true,
-          type: TextInputType.phone,
-        ),
-        SizedBox(height: 0.015.sh),
-        AuthTextField(
-          controller: _longitudeController,
-          hintText: 'Longitude',
-          label: 'Longitude',
-          optional: true,
-          type: TextInputType.phone,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AuthTextField(
+              controller: _latitudeController,
+              hintText: 'Latitude',
+              label: 'Latitude',
+              optional: true,
+              width: 0.39,
+              type: TextInputType.phone,
+            ),
+            AuthTextField(
+              controller: _longitudeController,
+              hintText: 'Longitude',
+              label: 'Longitude',
+              optional: true,
+              width: 0.39,
+              type: TextInputType.phone,
+            ),
+          ],
         ),
       ],
     );
