@@ -41,6 +41,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/.env
-    - assets/images/Logo_Sapuran_Berperan.png
     - assets/dark_mode_map.json
-    - assets/images/SiMandja-Logo.png

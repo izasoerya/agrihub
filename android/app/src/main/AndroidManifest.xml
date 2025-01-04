@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <application
-        android:label="agrihub_new"
+        android:label="Agrihub"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
