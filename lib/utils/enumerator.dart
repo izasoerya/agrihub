@@ -21,11 +21,11 @@ extension PlantStrainExtension on PlantStrain {
   String parseToString() {
     switch (this) {
       case PlantStrain.sawi:
-        return 'sawi';
+        return 'Sawi';
       case PlantStrain.bayam:
-        return 'bayam';
+        return 'Bayam';
       case PlantStrain.jagung:
-        return 'jagung';
+        return 'Jagung';
     }
   }
 }

@@ -3,20 +3,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthTextField extends StatefulWidget {
   final TextEditingController controller;
-  final String? Function(String?)? validator;
   final String hintText;
   final String label;
   final bool optional;
   final TextInputType type;
+  final double width;
+  final String? Function(String?)? validator;
 
   const AuthTextField({
     super.key,
     required this.controller,
-    this.validator,
     this.hintText = '',
     this.label = '',
     this.optional = false,
     this.type = TextInputType.text,
+    this.width = 0.8,
+    this.validator,
   });
 
   @override
@@ -29,7 +31,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 0.8.sw,
+      width: widget.width.sw,
       child: TextFormField(
         key: _formKey,
         keyboardType: widget.type,

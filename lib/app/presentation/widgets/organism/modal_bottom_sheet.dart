@@ -130,18 +130,23 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
           validator: TextfieldValidator.name,
         ),
         SizedBox(height: 0.015.sh),
-        AuthTextField(
-          controller: _qtyController,
-          hintText: 'Quantity',
-          label: 'Quantity',
-          validator: TextfieldValidator.name,
-          type: TextInputType.number,
-        ),
-        SizedBox(height: 0.015.sh),
-        DropdownPlant(
-          label: 'Jenis Tanaman',
-          initialValue: _selectedPlant,
-          onChanged: _onPlantChanged,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            DropdownPlant(
+              label: 'Jenis Tanaman',
+              initialValue: _selectedPlant,
+              onChanged: _onPlantChanged,
+            ),
+            AuthTextField(
+              controller: _qtyController,
+              hintText: 'Jumlah',
+              label: 'Jumlah',
+              width: 0.5,
+              validator: TextfieldValidator.name,
+              type: TextInputType.number,
+            ),
+          ],
         ),
         SizedBox(height: 0.015.sh),
         AuthTextField(
