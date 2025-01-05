@@ -131,7 +131,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
         Row(
           children: [
             Flexible(
-              flex: 25,
+              flex: 1,
               fit: FlexFit.tight,
               child: DropdownPlant(
                 label: 'Jenis Tanaman',
@@ -141,7 +141,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
             ),
             Padding(padding: EdgeInsets.only(left: 0.02.sw)),
             Flexible(
-              flex: 13,
+              flex: 1,
               child: AuthTextField(
                 controller: _qtyController,
                 hintText: 'Jumlah',

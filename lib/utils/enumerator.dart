@@ -2,17 +2,16 @@ enum PlantStrain {
   sawi,
   bayam,
   jagung,
-  asdasdasddsadsaadsadsdsaasdasd,
 }
 
 extension PlantStrainExtension on PlantStrain {
   static PlantStrain parseToEnum(String value) {
     switch (value) {
-      case 'sawi':
+      case 'Sawi':
         return PlantStrain.sawi;
-      case 'bayam':
+      case 'Bayam':
         return PlantStrain.bayam;
-      case 'jagung':
+      case 'Jagung':
         return PlantStrain.jagung;
       default:
         return PlantStrain.sawi;
@@ -27,8 +26,6 @@ extension PlantStrainExtension on PlantStrain {
         return 'Bayam';
       case PlantStrain.jagung:
         return 'Jagung';
-      case PlantStrain.asdasdasddsadsaadsadsdsaasdasd:
-        return 'asdasdasddsadsaadsadsdsaasdasdasddsasdasdaasdsad';
     }
   }
 }

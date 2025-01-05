@@ -48,7 +48,7 @@ class CustomInfoWindow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Flexible(
-                flex: 3,
+                flex: 5,
                 child: InfoWindowData(
                   header: 'Jenis',
                   data: marker.strain.parseToString(),
@@ -57,7 +57,7 @@ class CustomInfoWindow extends StatelessWidget {
               ),
               Padding(padding: EdgeInsets.only(left: 0.05.sw)),
               Flexible(
-                flex: 1,
+                flex: 3,
                 child: InfoWindowData(
                   header: 'Quantity',
                   data: marker.qty.toString(),
