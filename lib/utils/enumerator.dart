@@ -2,6 +2,7 @@ enum PlantStrain {
   sawi,
   bayam,
   jagung,
+  asdasdasddsadsaadsadsdsaasdasd,
 }
 
 extension PlantStrainExtension on PlantStrain {
@@ -26,6 +27,8 @@ extension PlantStrainExtension on PlantStrain {
         return 'Bayam';
       case PlantStrain.jagung:
         return 'Jagung';
+      case PlantStrain.asdasdasddsadsaadsadsdsaasdasd:
+        return 'asdasdasddsadsaadsadsdsaasdasdasddsasdasdaasdsad';
     }
   }
 }

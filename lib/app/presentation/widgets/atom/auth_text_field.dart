@@ -38,10 +38,27 @@ class _AuthTextFieldState extends State<AuthTextField> {
         controller: widget.controller,
         decoration: InputDecoration(
           focusColor: Colors.red,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 0.03.sw,
+            vertical: 0.015.sh,
+          ),
           hintText: widget.hintText,
           hintStyle:
               TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
-          labelText: widget.label + (widget.optional ? ' (Optional)' : ''),
+          labelText: null,
+          label: RichText(
+            text: TextSpan(
+              text: widget.label,
+              style: Theme.of(context).textTheme.bodyMedium,
+              children: [
+                if (!widget.optional)
+                  TextSpan(
+                    text: ' (*)',
+                    style: TextStyle(color: Colors.red),
+                  ),
+              ],
+            ),
+          ),
           labelStyle:
               TextStyle(color: Theme.of(context).textTheme.bodyMedium!.color),
           filled: true,
@@ -63,6 +80,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
         onChanged: (value) {
           _formKey.currentState?.validate();
         },
+        maxLines: null,
+        minLines: 1,
       ),
     );
   }

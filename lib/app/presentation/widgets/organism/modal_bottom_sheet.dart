@@ -101,8 +101,6 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
             ),
             SizedBox(height: 0.03.sh),
             _buildTextFields(),
-            SizedBox(height: 0.015.sh),
-            ImageUploader(onImageSelected: _onImageChanged),
             SizedBox(height: 0.03.sh),
             Text(
               'Simpan lokasi ini?',
@@ -125,34 +123,40 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
       children: [
         AuthTextField(
           controller: _nameController,
-          hintText: 'Name',
-          label: 'Name',
+          hintText: 'Nama',
+          label: 'Nama',
           validator: TextfieldValidator.name,
         ),
         SizedBox(height: 0.015.sh),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            DropdownPlant(
-              label: 'Jenis Tanaman',
-              initialValue: _selectedPlant,
-              onChanged: _onPlantChanged,
+            Flexible(
+              flex: 25,
+              fit: FlexFit.tight,
+              child: DropdownPlant(
+                label: 'Jenis Tanaman',
+                initialValue: _selectedPlant,
+                onChanged: _onPlantChanged,
+              ),
             ),
-            AuthTextField(
-              controller: _qtyController,
-              hintText: 'Jumlah',
-              label: 'Jumlah',
-              width: 0.5,
-              validator: TextfieldValidator.name,
-              type: TextInputType.number,
+            Padding(padding: EdgeInsets.only(left: 0.02.sw)),
+            Flexible(
+              flex: 13,
+              child: AuthTextField(
+                controller: _qtyController,
+                hintText: 'Jumlah',
+                label: 'Jumlah',
+                validator: TextfieldValidator.name,
+                type: TextInputType.number,
+              ),
             ),
           ],
         ),
         SizedBox(height: 0.015.sh),
         AuthTextField(
           controller: _descriptionController,
-          hintText: 'Description',
-          label: 'Description',
+          hintText: 'Deskripsi',
+          label: 'Deskripsi',
           optional: true,
         ),
         SizedBox(height: 0.015.sh),
@@ -174,24 +178,31 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AuthTextField(
-              controller: _latitudeController,
-              hintText: 'Latitude',
-              label: 'Latitude',
-              optional: true,
-              width: 0.39,
-              type: TextInputType.phone,
+            Flexible(
+              flex: 1,
+              child: AuthTextField(
+                controller: _latitudeController,
+                hintText: 'Latitude',
+                label: 'Latitude',
+                optional: true,
+                type: TextInputType.phone,
+              ),
             ),
-            AuthTextField(
-              controller: _longitudeController,
-              hintText: 'Longitude',
-              label: 'Longitude',
-              optional: true,
-              width: 0.39,
-              type: TextInputType.phone,
+            Padding(padding: EdgeInsets.only(left: 0.02.sw)),
+            Flexible(
+              flex: 1,
+              child: AuthTextField(
+                controller: _longitudeController,
+                hintText: 'Longitude',
+                label: 'Longitude',
+                optional: true,
+                type: TextInputType.phone,
+              ),
             ),
           ],
         ),
+        SizedBox(height: 0.015.sh),
+        ImageUploader(onImageSelected: _onImageChanged),
       ],
     );
   }

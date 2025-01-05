@@ -37,29 +37,40 @@ class _DropdownPlantState extends State<DropdownPlant> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 0.005.sh),
+      padding: EdgeInsets.symmetric(vertical: 0.001.sh),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Theme.of(context).colorScheme.secondary,
       ),
       child: DropdownButton<String>(
-        hint: Text("Jenis",
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              color: Theme.of(context).textTheme.bodyMedium!.color,
-            )),
+        hint: Text(
+          "Jenis",
+          style: TextStyle(
+            fontWeight: FontWeight.normal,
+            color: Theme.of(context).textTheme.bodyMedium!.color,
+          ),
+        ),
         underline: Container(),
         dropdownColor: Theme.of(context).colorScheme.secondary,
-        padding: EdgeInsets.symmetric(horizontal: 0.03.sw),
+        padding: EdgeInsets.symmetric(horizontal: 0.025.sw),
         items: <DropdownMenuItem<String>>[
           for (var item in PlantStrain.values)
             DropdownMenuItem<String>(
               value: item.parseToString(),
-              child: Text(item.parseToString(),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                  )),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 0.4.sw),
+                  child: Text(
+                    item.parseToString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ),
             )
         ],
         onChanged: onChanged,

@@ -61,9 +61,7 @@ class _ImageUploaderState extends State<ImageUploader> {
             child: SingleChildScrollView(
               child: Text(
                 _image == null ? 'Upload Image' : _image!.path,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: 18,
-                    ),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ),
