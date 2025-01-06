@@ -12,8 +12,14 @@ class InfrastructureMarker implements RepositoryPolygon {
   @override
   Future<EntitiesMarker?> createMarker(EntitiesMarker marker) async {
     String publicURL = '';
+    String shortImageURL = '';
+    if (marker.urlImage.contains('file_picker/')) {
+      shortImageURL = marker.urlImage.split('file_picker/').last;
+    }
+    if (marker.urlImage.contains('cache/')) {
+      shortImageURL = marker.urlImage.split('cache/').last;
+    }
     try {
-      final String shortImageURL = marker.urlImage.split('file_picker/').last;
       if (marker.urlImage.isNotEmpty) {
         final imageRes = await createImageMarker(marker.urlImage);
         if (!imageRes) {
@@ -69,9 +75,15 @@ class InfrastructureMarker implements RepositoryPolygon {
   Future<EntitiesMarker?> updateMarker(EntitiesMarker marker) async {
     String publicURL = '';
     final oldMarker = await readMarker(marker.uid);
+    String shortImageURL = '';
+    if (marker.urlImage.contains('file_picker/')) {
+      shortImageURL = marker.urlImage.split('file_picker/').last;
+    }
+    if (marker.urlImage.contains('cache/')) {
+      shortImageURL = marker.urlImage.split('cache/').last;
+    }
     try {
       if (!marker.urlImage.contains('NULL:')) {
-        final String shortImageURL = marker.urlImage.split('file_picker/').last;
         if (marker.urlImage.isNotEmpty) {
           final imageRes =
               await updateImageMarker(marker.urlImage, oldMarker!.urlImage);
@@ -117,8 +129,15 @@ class InfrastructureMarker implements RepositoryPolygon {
   @override
   Future<bool> createImageMarker(String url) async {
     final File imageFile = File(url);
-    final String shortFileURL = url.split('file_picker/').last;
-
+    String shortFileURL = '';
+    if (url.contains('file_picker/')) {
+      shortFileURL = url.split('file_picker/').last;
+    }
+    if (url.contains('cache/')) {
+      shortFileURL = url.split('cache/').last;
+    }
+    print('url: $url');
+    print('short url: $shortFileURL');
     try {
       await db.storage.from('agrihub_images').upload(shortFileURL, imageFile);
       return true;
@@ -131,7 +150,13 @@ class InfrastructureMarker implements RepositoryPolygon {
   @override
   Future<bool> updateImageMarker(String url, String oldUrl) async {
     final File imageFile = File(url);
-    final String shortFileURL = url.split('file_picker/').last;
+    String shortImageURL = '';
+    if (url.contains('file_picker/')) {
+      shortImageURL = url.split('file_picker/').last;
+    }
+    if (url.contains('cache/')) {
+      shortImageURL = url.split('cache/').last;
+    }
 
     try {
       final String relativePath = oldUrl.split('agrihub_images/').last;
@@ -141,7 +166,7 @@ class InfrastructureMarker implements RepositoryPolygon {
     }
     try {
       await db.storage.from('agrihub_images').upload(
-            shortFileURL,
+            shortImageURL,
             imageFile,
             fileOptions: const FileOptions(upsert: true),
           );
