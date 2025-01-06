@@ -43,11 +43,18 @@ class _DropdownPlantState extends State<DropdownPlant> {
         color: Theme.of(context).colorScheme.secondary,
       ),
       child: DropdownButton<String>(
-        hint: Text(
-          "Jenis",
-          style: TextStyle(
-            fontWeight: FontWeight.normal,
-            color: Theme.of(context).textTheme.bodyMedium!.color,
+        hint: RichText(
+          text: TextSpan(
+            text: widget.label,
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyMedium!.color,
+            ),
+            children: [
+              TextSpan(
+                text: ' (*)',
+                style: TextStyle(color: Colors.red),
+              ),
+            ],
           ),
         ),
         underline: Container(),

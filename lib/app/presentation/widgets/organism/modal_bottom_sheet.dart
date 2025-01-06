@@ -134,7 +134,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
               flex: 1,
               fit: FlexFit.tight,
               child: DropdownPlant(
-                label: 'Jenis Tanaman',
+                label: 'Jenis',
                 initialValue: _selectedPlant,
                 onChanged: _onPlantChanged,
               ),
