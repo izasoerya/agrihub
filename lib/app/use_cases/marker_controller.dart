@@ -18,6 +18,7 @@ class MarkerController {
         Marker(
           markerId: MarkerId(data.uid),
           position: data.location,
+          draggable: true,
           onTap: () => showGeneralDialog(
             context: context,
             barrierDismissible: true,
@@ -51,6 +52,14 @@ class MarkerController {
               );
             },
           ),
+          onDragEnd: (LatLng latLng) {
+            BlocProvider.of<MarkerStateBloc>(context).add(UpdateMarkerData(
+              marker: data.copyWith(
+                location: latLng,
+                urlImage: 'NULL:${data.urlImage}',
+              ),
+            ));
+          },
         ),
       );
     }
