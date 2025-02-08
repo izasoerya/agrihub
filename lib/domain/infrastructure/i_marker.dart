@@ -2,15 +2,21 @@ import 'dart:io';
 
 import 'package:agrihub_new/domain/entities/e_marker.dart';
 import 'package:agrihub_new/domain/repositories/r_marker.dart';
+import 'package:agrihub_new/utils/enumerator.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class InfrastructureMarker implements RepositoryPolygon {
+  final UserTypes user;
   final Uuid _uuid = const Uuid();
   final db = Supabase.instance.client;
 
+  InfrastructureMarker(this.user);
+
   @override
   Future<EntitiesMarker?> createMarker(EntitiesMarker marker) async {
+    if (user == UserTypes.buyer) return null;
+
     String publicURL = '';
     String shortImageURL = '';
     if (marker.urlImage.contains('file_picker/')) {
@@ -47,6 +53,7 @@ class InfrastructureMarker implements RepositoryPolygon {
 
   @override
   Future<EntitiesMarker?> readMarker(String uid) async {
+    if (user == UserTypes.buyer) return null;
     try {
       final res =
           await db.from('marker_agrihub').select().eq('uid', uid).single();
@@ -60,10 +67,12 @@ class InfrastructureMarker implements RepositoryPolygon {
   @override
   Future<List<EntitiesMarker?>> readListMarker(String uidUser) async {
     try {
-      final res = await db
-          .from('marker_agrihub')
-          .select()
-          .contains('uidUser', [uidUser]);
+      final res = user == UserTypes.farmer
+          ? await db
+              .from('marker_agrihub')
+              .select()
+              .contains('uidUser', [uidUser])
+          : await db.from('marker_agrihub').select();
       return res.map((e) => EntitiesMarker.fromJSON(e)).toList();
     } catch (e) {
       print('Error: $e');
@@ -73,6 +82,7 @@ class InfrastructureMarker implements RepositoryPolygon {
 
   @override
   Future<EntitiesMarker?> updateMarker(EntitiesMarker marker) async {
+    if (user == UserTypes.buyer) return null;
     String publicURL = '';
     final oldMarker = await readMarker(marker.uid);
     String shortImageURL = '';
@@ -116,6 +126,7 @@ class InfrastructureMarker implements RepositoryPolygon {
 
   @override
   Future<void> deleteMarker(EntitiesMarker marker) async {
+    if (user == UserTypes.buyer) return null;
     try {
       if (marker.urlImage.isNotEmpty) {
         await deteleImageMarker(marker.urlImage);
@@ -128,6 +139,7 @@ class InfrastructureMarker implements RepositoryPolygon {
 
   @override
   Future<bool> createImageMarker(String url) async {
+    if (user == UserTypes.buyer) return false;
     final File imageFile = File(url);
     String shortFileURL = '';
     if (url.contains('file_picker/')) {
@@ -149,6 +161,7 @@ class InfrastructureMarker implements RepositoryPolygon {
 
   @override
   Future<bool> updateImageMarker(String url, String oldUrl) async {
+    if (user == UserTypes.buyer) return false;
     final File imageFile = File(url);
     String shortImageURL = '';
     if (url.contains('file_picker/')) {
@@ -179,6 +192,7 @@ class InfrastructureMarker implements RepositoryPolygon {
 
   @override
   Future<void> deteleImageMarker(String url) async {
+    if (user == UserTypes.buyer) return;
     final String relativePath = url.split('agrihub_images/').last;
 
     try {
@@ -190,6 +204,7 @@ class InfrastructureMarker implements RepositoryPolygon {
 
   @override
   Future<void> testDeleteImageMarker() async {
+    if (user == UserTypes.buyer) return;
     try {
       final res = await db.storage.from('agrihub_images').remove([
         'https://gysbnohwkzlxhlqcfhwn.supabase.co/storage/v1/object/public/agrihub_images/1735372142085/IMG-20241228-WA0044.jpg'

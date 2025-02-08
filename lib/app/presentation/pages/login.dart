@@ -97,18 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text('Belum Punya Akun? Buat Akun'),
               ),
               TextButton(
-                onPressed: () async {
-                  final res = await const AuthController().signIn(
-                    'alan@gmail.com',
-                    'alanalan',
-                  );
-                  if (context.mounted) {
-                    res
-                        ? ModalSnackbar(context).show('Login Berhasil')
-                        : ModalSnackbar(context).show('Login Gagal');
-                  }
-                },
-                child: const Text('Bypass Login'),
+                onPressed: () => AuthController().signInAsBuyer(),
+                child: const Text('Masuk Sebagai Tamu'),
               ),
             ],
           ),

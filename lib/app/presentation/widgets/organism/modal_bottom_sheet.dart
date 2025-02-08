@@ -225,8 +225,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                 AddMarkerData(
                   marker: EntitiesMarker(
                     uid: '',
-                    uidCreator: defaultUser.uid,
-                    uidUser: [defaultUser.uid],
+                    uidCreator: defaultUser.user.uid,
+                    uidUser: [defaultUser.user.uid],
                     name: _nameController.text,
                     description: _descriptionController.text,
                     strain: PlantStrainExtension.parseToEnum(_selectedPlant!),

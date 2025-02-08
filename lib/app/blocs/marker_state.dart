@@ -34,27 +34,31 @@ class MarkerState {
 class MarkerStateBloc extends Bloc<MarkerEvent, MarkerState> {
   MarkerStateBloc() : super(MarkerState(markers: {})) {
     on<FetchMarkerData>((event, emit) async {
-      final markers = await ServiceMarker().fetchListMarker(defaultUser.uid);
+      final markers =
+          await ServiceMarker().fetchListMarker(defaultUser.user.uid);
       emit(MarkerState(markers: markers));
     });
 
     on<AddMarkerData>((event, emit) async {
       await ServiceMarker().addMarker(event.marker);
-      final markers = await ServiceMarker().fetchListMarker(defaultUser.uid);
+      final markers =
+          await ServiceMarker().fetchListMarker(defaultUser.user.uid);
 
       emit(MarkerState(markers: markers));
     });
 
     on<UpdateMarkerData>((event, emit) async {
       await ServiceMarker().updateMarker(event.marker);
-      final markers = await ServiceMarker().fetchListMarker(defaultUser.uid);
+      final markers =
+          await ServiceMarker().fetchListMarker(defaultUser.user.uid);
 
       emit(MarkerState(markers: markers));
     });
 
     on<DeleteMarkerData>((event, emit) async {
       await ServiceMarker().deleteMarker(event.marker);
-      final markers = await ServiceMarker().fetchListMarker(defaultUser.uid);
+      final markers =
+          await ServiceMarker().fetchListMarker(defaultUser.user.uid);
 
       emit(MarkerState(markers: markers));
     });

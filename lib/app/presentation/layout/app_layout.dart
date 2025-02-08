@@ -38,8 +38,8 @@ class AppLayout extends StatelessWidget {
               ListTile(
                 title: const Text('Download CSV'),
                 leading: const Icon(Icons.download),
-                onTap: () async => UtilExcel().createExcel(
-                    await ServiceMarker().fetchListMarker(defaultUser.uid)),
+                onTap: () async => UtilExcel().createExcel(await ServiceMarker()
+                    .fetchListMarker(defaultUser.user.uid)),
               ),
               ListTile(
                 title: const Text('Logout'),

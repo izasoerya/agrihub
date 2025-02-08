@@ -4,6 +4,7 @@ import 'package:agrihub_new/app/presentation/widgets/atom/info_window_data.dart'
 import 'package:agrihub_new/app/presentation/widgets/atom/submit_button.dart';
 import 'package:agrihub_new/app/presentation/widgets/organism/modal_bottom_sheet.dart';
 import 'package:agrihub_new/domain/entities/e_marker.dart';
+import 'package:agrihub_new/utils/default_user.dart';
 import 'package:agrihub_new/utils/enumerator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,17 +80,20 @@ class CustomInfoWindow extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SubmitButton(
-                onTap: () => showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (BuildContext modalContext) => ModalBottomSheet(
-                    parentContext: context,
-                    uidMarker: marker.uid,
-                  ),
-                ),
-                text: 'Update',
-              ),
+              defaultUser.type == UserTypes.farmer
+                  ? SubmitButton(
+                      onTap: () => showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext modalContext) =>
+                            ModalBottomSheet(
+                          parentContext: context,
+                          uidMarker: marker.uid,
+                        ),
+                      ),
+                      text: 'Update',
+                    )
+                  : Container(),
               SubmitButton(
                 onTap: () => Navigator.pop(context),
                 text: 'Close',

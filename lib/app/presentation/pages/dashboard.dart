@@ -1,6 +1,8 @@
 import 'package:agrihub_new/app/presentation/widgets/organism/floating_map_button.dart';
 import 'package:agrihub_new/app/use_cases/gps_controller.dart';
 import 'package:agrihub_new/app/use_cases/marker_controller.dart';
+import 'package:agrihub_new/utils/default_user.dart';
+import 'package:agrihub_new/utils/enumerator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:agrihub_new/app/blocs/marker_state.dart';
@@ -56,7 +58,8 @@ class _DashboardPageState extends State<DashboardPage> {
                       setState(() => _controller = controller);
                     },
                   ),
-                  if (_controller != null)
+                  if (_controller != null &&
+                      defaultUser.type == UserTypes.farmer)
                     Positioned(
                       bottom: 20,
                       right: 20,

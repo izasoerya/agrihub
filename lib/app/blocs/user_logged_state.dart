@@ -19,7 +19,7 @@ class UserLoggedState {
 
 class UserLoggedStateBloc extends Bloc<UserLoggedEvent, UserLoggedState> {
   UserLoggedStateBloc()
-      : super(UserLoggedState(isLogged: false, user: defaultUser)) {
+      : super(UserLoggedState(isLogged: false, user: defaultUser.user)) {
     on<ToggleUserLoggedInEvent>((event, emit) {
       emit(UserLoggedState(isLogged: !state.isLogged, user: event.user));
     });

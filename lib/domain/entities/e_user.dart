@@ -1,3 +1,5 @@
+import 'package:agrihub_new/utils/enumerator.dart';
+
 class EntitiesUser {
   final String uid;
   final String name;
@@ -16,6 +18,7 @@ class EntitiesUser {
     String? name,
     String? email,
     String? password,
+    UserTypes? type,
   }) {
     return EntitiesUser(
       uid: uid ?? this.uid,
